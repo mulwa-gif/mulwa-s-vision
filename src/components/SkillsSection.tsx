@@ -1,6 +1,9 @@
 import { Beaker, Users2, Laptop } from "lucide-react";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const SkillsSection = () => {
+  const { ref, isVisible } = useScrollReveal();
+  
   const skillCategories = [
     {
       icon: Beaker,
@@ -41,7 +44,13 @@ const SkillsSection = () => {
   ];
 
   return (
-    <section id="skills" className="section-padding bg-hero-gradient relative overflow-hidden">
+    <section 
+      ref={ref}
+      id="skills" 
+      className={`section-padding bg-hero-gradient relative overflow-hidden transition-all duration-700 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+    >
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-accent/10 rounded-full blur-3xl" />

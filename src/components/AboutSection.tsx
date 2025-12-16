@@ -1,6 +1,9 @@
 import { GraduationCap, Lightbulb, Users, Scale } from "lucide-react";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const AboutSection = () => {
+  const { ref, isVisible } = useScrollReveal();
+  
   const highlights = [
     {
       icon: GraduationCap,
@@ -25,7 +28,13 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="section-padding bg-background">
+    <section 
+      ref={ref}
+      id="about" 
+      className={`section-padding bg-background transition-all duration-700 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+    >
       <div className="container-narrow">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Content */}

@@ -1,7 +1,10 @@
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const ContactSection = () => {
+  const { ref, isVisible } = useScrollReveal();
+  
   const contactInfo = [
     {
       icon: Mail,
@@ -24,7 +27,13 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="section-padding bg-hero-gradient relative overflow-hidden">
+    <section 
+      ref={ref}
+      id="contact" 
+      className={`section-padding bg-hero-gradient relative overflow-hidden transition-all duration-700 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+    >
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 right-20 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />

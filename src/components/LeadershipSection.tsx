@@ -1,6 +1,9 @@
 import { Crown, Megaphone, BookOpen } from "lucide-react";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const LeadershipSection = () => {
+  const { ref, isVisible } = useScrollReveal();
+  
   const roles = [
     {
       icon: Crown,
@@ -34,7 +37,13 @@ const LeadershipSection = () => {
   ];
 
   return (
-    <section id="leadership" className="section-padding bg-secondary/50">
+    <section 
+      ref={ref}
+      id="leadership" 
+      className={`section-padding bg-secondary/50 transition-all duration-700 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+    >
       <div className="container-narrow">
         <div className="text-center mb-16">
           <span className="text-accent font-medium tracking-widest uppercase text-sm">
