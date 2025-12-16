@@ -1,6 +1,9 @@
 import { FlaskConical, Cpu, Vote, Users, Drum } from "lucide-react";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const ProjectsSection = () => {
+  const { ref, isVisible } = useScrollReveal();
+  
   const projects = [
     {
       icon: FlaskConical,
@@ -35,7 +38,13 @@ const ProjectsSection = () => {
   ];
 
   return (
-    <section id="projects" className="section-padding bg-secondary/50">
+    <section 
+      ref={ref}
+      id="projects" 
+      className={`section-padding bg-secondary/50 transition-all duration-700 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+    >
       <div className="container-narrow">
         <div className="text-center mb-16">
           <span className="text-accent font-medium tracking-widest uppercase text-sm">

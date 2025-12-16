@@ -1,6 +1,9 @@
 import { GraduationCap, School, BookOpen } from "lucide-react";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const EducationSection = () => {
+  const { ref, isVisible } = useScrollReveal();
+  
   const education = [
     {
       icon: GraduationCap,
@@ -33,7 +36,13 @@ const EducationSection = () => {
   ];
 
   return (
-    <section id="education" className="section-padding bg-background">
+    <section 
+      ref={ref}
+      id="education" 
+      className={`section-padding bg-background transition-all duration-700 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+    >
       <div className="container-narrow">
         <div className="text-center mb-16">
           <span className="text-accent font-medium tracking-widest uppercase text-sm">

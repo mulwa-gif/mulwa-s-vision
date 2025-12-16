@@ -1,6 +1,9 @@
 import { Shield, Scale, Brain, Sparkles, Heart } from "lucide-react";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const ValuesSection = () => {
+  const { ref, isVisible } = useScrollReveal();
+  
   const values = [
     {
       icon: Shield,
@@ -30,7 +33,13 @@ const ValuesSection = () => {
   ];
 
   return (
-    <section id="values" className="section-padding bg-background">
+    <section 
+      ref={ref}
+      id="values" 
+      className={`section-padding bg-background transition-all duration-700 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+    >
       <div className="container-narrow">
         <div className="text-center mb-16">
           <span className="text-accent font-medium tracking-widest uppercase text-sm">
