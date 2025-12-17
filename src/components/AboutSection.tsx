@@ -44,18 +44,21 @@ const AboutSection = () => {
                 About Me
               </span>
             </div>
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Educating Minds. Innovating Ideas. Speaking for the People.
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Educator & Science Specialist
             </h2>
+            <p className="text-accent font-medium mb-6">
+              Chemistry & Physics | Student Leader at SEKU | Youth Leader, Makueni
+            </p>
+            <p className="text-muted-foreground italic mb-6 border-l-4 border-accent/30 pl-4">
+              Committed to excellence, integrity, and youth empowerment.
+            </p>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                I am Mulwa Martin, a Bachelor of Education (Science) student at South Eastern Kenya University, specializing in <span className="text-foreground font-medium">Chemistry and Physics</span>. I am passionate about science education, innovation, student leadership, and civic engagement.
+                As a skilled <span className="text-foreground font-medium">Chemistry and Physics educator</span> with a passion for technology, I offer a comprehensive approach to learning. I specialize in creating engaging online courses, interactive simulations, and personalized tutoring sessions.
               </p>
               <p>
-                I serve as the <span className="text-foreground font-medium">President of the SEKU Science & Innovation Club</span>, where I lead initiatives that promote scientific inquiry, creativity, and interdisciplinary collaboration.
-              </p>
-              <p>
-                Alongside my academic work, I am a <span className="text-foreground font-medium">political activist</span>, actively engaged in advocacy, public discourse, and student civic awareness, with a focus on responsible leadership, good governance, and peaceful democratic participation.
+                I help learners achieve their goals through a blend of <span className="text-foreground font-medium">traditional teaching methods</span> and <span className="text-foreground font-medium">cutting-edge digital solutions</span>. As President of the SEKU Science & Innovation Club, I lead initiatives that promote scientific inquiry and creativity.
               </p>
             </div>
             <div className="accent-bar mt-8" />
