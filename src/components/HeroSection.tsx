@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, ChevronDown } from "lucide-react";
+import { Mail, Phone, MapPin, ChevronDown, Linkedin, Twitter, Github } from "lucide-react";
 import profileImage from "@/assets/profile.png";
 
 const HeroSection = () => {
@@ -44,7 +44,7 @@ const HeroSection = () => {
         </p>
 
         {/* Contact Pills */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12 animate-fade-up opacity-0 animation-delay-400">
+        <div className="flex flex-wrap justify-center gap-3 mb-8 animate-fade-up opacity-0 animation-delay-400">
           <a
             href="mailto:martinmulwa0150@gmail.com"
             className="flex items-center gap-2 px-4 py-2 bg-primary-foreground/10 backdrop-blur-sm rounded-full text-primary-foreground/90 text-sm hover:bg-primary-foreground/20 transition-colors"
@@ -64,6 +64,37 @@ const HeroSection = () => {
             <MapPin className="w-4 h-4" />
             <span>Kenya</span>
           </span>
+        </div>
+
+        {/* Social Media Links */}
+        <div className="flex justify-center gap-4 mb-12 animate-fade-up opacity-0 animation-delay-400">
+          <a
+            href="https://linkedin.com/in/mulwa-martin"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-3 bg-primary-foreground/10 backdrop-blur-sm rounded-full text-primary-foreground/90 hover:bg-accent hover:text-primary transition-colors"
+            aria-label="LinkedIn"
+          >
+            <Linkedin className="w-5 h-5" />
+          </a>
+          <a
+            href="https://twitter.com/mulwamartin"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-3 bg-primary-foreground/10 backdrop-blur-sm rounded-full text-primary-foreground/90 hover:bg-accent hover:text-primary transition-colors"
+            aria-label="Twitter/X"
+          >
+            <Twitter className="w-5 h-5" />
+          </a>
+          <a
+            href="https://github.com/mulwamartin"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-3 bg-primary-foreground/10 backdrop-blur-sm rounded-full text-primary-foreground/90 hover:bg-accent hover:text-primary transition-colors"
+            aria-label="GitHub"
+          >
+            <Github className="w-5 h-5" />
+          </a>
         </div>
 
         {/* Scroll indicator */}
