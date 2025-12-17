@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X, BookOpen } from "lucide-react";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,8 +53,8 @@ const Navigation = () => {
           </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
+          <div className="hidden md:flex items-center gap-6">
+            {isHomePage && navItems.map((item) => (
               <button
                 key={item.label}
                 onClick={() => scrollToSection(item.href)}
@@ -64,6 +67,17 @@ const Navigation = () => {
                 {item.label}
               </button>
             ))}
+            <Link
+              to="/learning-materials"
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                isScrolled
+                  ? "bg-accent text-primary hover:bg-accent/90"
+                  : "bg-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/30"
+              }`}
+            >
+              <BookOpen className="w-4 h-4" />
+              Learning Materials
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -86,7 +100,7 @@ const Navigation = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden bg-background/95 backdrop-blur-md border-b border-border">
             <div className="px-6 py-4 space-y-4">
-              {navItems.map((item) => (
+              {isHomePage && navItems.map((item) => (
                 <button
                   key={item.label}
                   onClick={() => scrollToSection(item.href)}
@@ -95,6 +109,14 @@ const Navigation = () => {
                   {item.label}
                 </button>
               ))}
+              <Link
+                to="/learning-materials"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center gap-2 w-full text-left text-accent hover:text-foreground transition-colors font-medium"
+              >
+                <BookOpen className="w-4 h-4" />
+                Learning Materials
+              </Link>
             </div>
           </div>
         )}
