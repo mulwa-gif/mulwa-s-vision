@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import LearningMaterials from "./pages/LearningMaterials";
 import PeriodicTable from "./pages/PeriodicTable";
+import VirtualLab from "./pages/VirtualLab";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
