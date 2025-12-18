@@ -13,15 +13,17 @@ const ProjectsSection = () => {
       description:
         "A fully-equipped virtual lab where students can safely perform chemistry experiments online, with all instructions, materials, and guidance provided.",
       status: "Coming Soon",
-      color: "bg-emerald-500/20 text-emerald-400"
+      color: "bg-emerald-500/20 text-emerald-400",
+      link: null
     },
     {
       icon: Atom,
       title: "AI-Powered Interactive Periodic Table",
       description:
         "A dynamic, AI-driven periodic table that displays complete information for every element—atomic number, atomic mass, electron configuration, properties, uses, and more.",
-      status: "Coming Soon",
-      color: "bg-blue-500/20 text-blue-400"
+      status: "Available",
+      color: "bg-blue-500/20 text-blue-400",
+      link: "/periodic-table"
     },
     {
       icon: GraduationCap,
@@ -29,7 +31,8 @@ const ProjectsSection = () => {
       description:
         "A comprehensive, adaptive learning system tailored for each student, offering all lessons, quizzes, and resources needed for effective science learning.",
       status: "In Development",
-      color: "bg-purple-500/20 text-purple-400"
+      color: "bg-purple-500/20 text-purple-400",
+      link: null
     },
     {
       icon: Beaker,
@@ -37,7 +40,8 @@ const ProjectsSection = () => {
       description:
         "A web application that allows students to simulate and visualize chemistry and physics experiments completely online, with all tools and instructions provided.",
       status: "Coming Soon",
-      color: "bg-amber-500/20 text-amber-400"
+      color: "bg-amber-500/20 text-amber-400",
+      link: null
     },
   ];
 
@@ -64,12 +68,8 @@ const ProjectsSection = () => {
         </div>
 
         <div className="grid sm:grid-cols-2 gap-6 mb-12">
-          {projects.map((project, index) => (
-            <div
-              key={project.title}
-              className="group card-elevated p-6 hover:scale-[1.02]"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
+          {projects.map((project, index) => {
+            const CardContent = (
               <div className="flex items-start gap-4">
                 <div className={`p-3 rounded-xl shrink-0 ${project.color.split(' ')[0]}`}>
                   <project.icon className={`w-6 h-6 ${project.color.split(' ')[1]}`} />
@@ -88,8 +88,27 @@ const ProjectsSection = () => {
                   </p>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+
+            return project.link ? (
+              <Link
+                key={project.title}
+                to={project.link}
+                className="group card-elevated p-6 hover:scale-[1.02] hover:border-accent/50"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                {CardContent}
+              </Link>
+            ) : (
+              <div
+                key={project.title}
+                className="group card-elevated p-6 hover:scale-[1.02]"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                {CardContent}
+              </div>
+            );
+          })}
         </div>
 
         {/* CTA */}
