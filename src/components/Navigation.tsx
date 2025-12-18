@@ -76,7 +76,7 @@ const Navigation = () => {
               }`}
             >
               <BookOpen className="w-4 h-4" />
-              Learning Materials
+              Resources
             </Link>
           </div>
 
@@ -115,7 +115,7 @@ const Navigation = () => {
                 className="flex items-center gap-2 w-full text-left text-accent hover:text-foreground transition-colors font-medium"
               >
                 <BookOpen className="w-4 h-4" />
-                Learning Materials
+                Resources
               </Link>
             </div>
           </div>
