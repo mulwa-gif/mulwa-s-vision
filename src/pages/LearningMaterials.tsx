@@ -17,7 +17,16 @@ import {
   Lightbulb,
   GraduationCap,
   ChevronRight,
-  ExternalLink
+  ExternalLink,
+  Target,
+  Eye,
+  Rocket,
+  Globe,
+  Users,
+  Clock,
+  Sparkles,
+  Heart,
+  Mail
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -150,7 +159,26 @@ const LearningMaterials = () => {
     },
   ];
 
-  const currentTopics = activeSubject === "chemistry" ? chemistryTopics : physicsTopics;
+  const impactStats = [
+    { value: "10K+", label: "Students Reached", icon: Users },
+    { value: "500+", label: "Interactive Resources", icon: Sparkles },
+    { value: "50+", label: "Schools Served", icon: Globe },
+    { value: "24/7", label: "Learning Support", icon: Clock },
+  ];
+
+  const coreValues = [
+    { icon: "🔬", title: "Scientific Integrity", description: "Accurate, up-to-date content backed by scientific principles" },
+    { icon: "🚀", title: "Innovation", description: "Constantly exploring new technologies to enhance learning" },
+    { icon: "🌍", title: "Accessibility", description: "Free resources available to learners everywhere" },
+    { icon: "🤝", title: "Community", description: "Building a network of passionate science enthusiasts" },
+  ];
+
+  const timeline = [
+    { year: "2024", title: "Foundation", description: "Teacher Martin's Resources was born from a passion for making science education more engaging and accessible to students." },
+    { year: "2024", title: "First Launch", description: "Launched our initial platform with physics simulations and interactive chemistry modules." },
+    { year: "2025", title: "AI Integration", description: "Introduced AI-powered learning assistance and interactive periodic table." },
+    { year: "Future", title: "Virtual Labs", description: "Developing immersive VR science laboratories and expanding resources." },
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -176,9 +204,9 @@ const LearningMaterials = () => {
             </div>
             <div>
               <h1 className="font-display text-4xl md:text-5xl font-bold text-primary-foreground">
-                Learning Materials
+                Teacher Martin's Resources
               </h1>
-              <p className="text-primary-foreground/70">Chemistry & Physics Resources</p>
+              <p className="text-primary-foreground/70">Transforming Science Education Through Technology</p>
             </div>
           </div>
           
@@ -189,52 +217,160 @@ const LearningMaterials = () => {
         </div>
       </header>
 
-      {/* Educator Info Banner */}
-      <section className="bg-secondary/50 border-y border-border py-8">
+      {/* Mission Section */}
+      <section className="section-padding bg-secondary/30">
         <div className="container-narrow px-6">
-          <div className="flex flex-col md:flex-row md:items-center gap-6">
-            <div className="flex-1">
-              <h2 className="font-display text-xl font-semibold text-foreground mb-2">
-                Educator & Science Specialist
-              </h2>
-              <p className="text-muted-foreground">
-                Chemistry & Physics | Student Leader at SEKU | Youth Leader, Makueni
+          <div className="grid md:grid-cols-2 gap-12 items-start">
+            {/* Our Mission */}
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <Target className="w-6 h-6 text-accent" />
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground">Our Mission</h2>
+              </div>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                At <span className="text-accent font-semibold">Teacher Martin's Resources</span>, we believe that science education should be <span className="text-foreground font-medium">accessible, engaging, and interactive</span> for everyone. We're on a mission to revolutionize how students learn physics, chemistry, and other sciences by combining cutting-edge technology with proven educational methodologies.
               </p>
-              <p className="text-accent text-sm mt-2 font-medium">
-                Committed to excellence, integrity, and youth empowerment.
+              <p className="text-muted-foreground leading-relaxed">
+                Founded in 2024, this platform emerged from a simple observation: traditional science education often fails to capture the wonder and excitement of discovery. We're changing that by creating immersive learning experiences that make complex concepts intuitive and fun.
               </p>
             </div>
-            <div className="flex gap-3">
-              <Button variant="outline" size="sm" className="gap-2">
-                <FileText className="w-4 h-4" />
-                Course Catalog
-              </Button>
-              <Button size="sm" className="gap-2 bg-accent hover:bg-accent/90 text-primary">
-                <Play className="w-4 h-4" />
-                Start Learning
-              </Button>
+
+            {/* About the Author */}
+            <div className="card-elevated p-6 bg-gradient-to-br from-accent/5 to-transparent">
+              <h2 className="font-display text-2xl font-bold text-foreground mb-4">About Teacher Martin</h2>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                Hello! I'm <span className="text-foreground font-semibold">Mulwa Martin</span>, the creator of this learning platform. I'm passionate about making science learning accessible and enjoyable for everyone — from curious beginners to lifelong learners.
+              </p>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                With a background in <span className="text-foreground font-medium">science education and technology</span>, I founded this platform to bridge the gap between traditional teaching and modern interactive learning. My goal is to build tools that help students <span className="text-foreground font-medium">understand concepts deeply</span> rather than just memorize formulas.
+              </p>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                When I'm not creating new learning resources or writing educational content, you'll probably find me exploring new teaching methods, reading about emerging technologies, or helping students discover the beauty of physics and chemistry.
+              </p>
+              <a 
+                href="mailto:contact@example.com" 
+                className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors"
+              >
+                <Mail className="w-4 h-4" />
+                Email me directly — I'd love to hear your feedback!
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
+      {/* Vision Section */}
       <section className="section-padding">
         <div className="container-narrow px-6">
-          <div className="card-elevated p-8 bg-gradient-to-br from-accent/5 to-transparent">
-            <p className="text-muted-foreground leading-relaxed text-lg">
-              "As a skilled Chemistry and Physics educator with a passion for technology, I offer a comprehensive 
-              approach to learning. I specialize in creating engaging online courses, interactive simulations, 
-              and personalized tutoring sessions. I help learners achieve their goals through a blend of traditional 
-              teaching methods and cutting-edge digital solutions."
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Eye className="w-6 h-6 text-accent" />
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground">Our Vision</h2>
+            </div>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              We envision a world where every student has access to <span className="text-foreground font-medium">high-quality science education</span>, regardless of their location or background. Through interactive simulations, AI-powered assistance, and collaborative learning platforms, we're building the future of STEM education.
             </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="card-elevated p-6 border-l-4 border-accent">
+              <div className="flex items-center gap-3 mb-3">
+                <Rocket className="w-5 h-5 text-accent" />
+                <h3 className="font-display text-lg font-semibold text-foreground">Innovation</h3>
+              </div>
+              <p className="text-sm text-accent mb-2">Pushing Boundaries</p>
+              <p className="text-muted-foreground text-sm">
+                Continuously developing new ways to make science education more engaging and effective.
+              </p>
+            </div>
+
+            <div className="card-elevated p-6 border-l-4 border-accent">
+              <div className="flex items-center gap-3 mb-3">
+                <Globe className="w-5 h-5 text-accent" />
+                <h3 className="font-display text-lg font-semibold text-foreground">Accessibility</h3>
+              </div>
+              <p className="text-sm text-accent mb-2">Education for All</p>
+              <p className="text-muted-foreground text-sm">
+                Making quality science resources available to students everywhere, for free.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Impact Stats */}
+      <section className="section-padding bg-primary text-primary-foreground">
+        <div className="container-narrow px-6">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-center mb-12">Our Impact</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {impactStats.map((stat, index) => (
+              <div key={index} className="text-center">
+                <stat.icon className="w-8 h-8 text-accent mx-auto mb-3" />
+                <div className="text-3xl md:text-4xl font-bold text-accent mb-2">{stat.value}</div>
+                <div className="text-primary-foreground/70 text-sm">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Journey Timeline */}
+      <section className="section-padding">
+        <div className="container-narrow px-6">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground text-center mb-12">Our Journey</h2>
+          <div className="relative">
+            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-accent/30 transform md:-translate-x-1/2" />
+            <div className="space-y-8">
+              {timeline.map((item, index) => (
+                <div 
+                  key={index} 
+                  className={`relative flex flex-col md:flex-row gap-4 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
+                >
+                  <div className="md:w-1/2" />
+                  <div className="absolute left-4 md:left-1/2 w-3 h-3 bg-accent rounded-full transform -translate-x-1/2 mt-2" />
+                  <div className={`ml-10 md:ml-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12'}`}>
+                    <span className="text-accent font-semibold">{item.year}</span>
+                    <h3 className="font-display text-lg font-semibold text-foreground">{item.title}</h3>
+                    <p className="text-muted-foreground text-sm">{item.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Core Values */}
+      <section className="section-padding bg-secondary/30">
+        <div className="container-narrow px-6">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground text-center mb-12">Our Core Values</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {coreValues.map((value, index) => (
+              <div key={index} className="card-elevated p-6 text-center">
+                <div className="text-4xl mb-4">{value.icon}</div>
+                <h3 className="font-display text-lg font-semibold text-foreground mb-2">{value.title}</h3>
+                <p className="text-muted-foreground text-sm">{value.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Subject Tabs */}
-      <section className="section-padding pt-0">
+      <section className="section-padding">
         <div className="container-narrow px-6">
+          <div className="text-center mb-12">
+            <span className="text-accent font-medium tracking-widest uppercase text-sm">
+              Learning Resources
+            </span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-4 mb-4">
+              Explore by Subject
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Access comprehensive notes, video lessons, and interactive materials for Chemistry and Physics.
+            </p>
+          </div>
+
           <Tabs defaultValue="chemistry" className="w-full">
             <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-12">
               <TabsTrigger 
@@ -343,21 +479,25 @@ const LearningMaterials = () => {
             Explore my projects and access complete, AI-enhanced resources to fully support your science learning journey.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Button 
-              size="lg" 
-              className="bg-accent hover:bg-accent/90 text-primary gap-2"
-            >
-              <GraduationCap className="w-5 h-5" />
-              Start Learning Now
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 gap-2"
-            >
-              <ExternalLink className="w-5 h-5" />
-              Contact for Tutoring
-            </Button>
+            <Link to="/periodic-table">
+              <Button 
+                size="lg" 
+                className="bg-accent hover:bg-accent/90 text-primary gap-2"
+              >
+                <Atom className="w-5 h-5" />
+                Try Interactive Periodic Table
+              </Button>
+            </Link>
+            <Link to="/#contact">
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 gap-2"
+              >
+                <ExternalLink className="w-5 h-5" />
+                Contact for Tutoring
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -366,7 +506,7 @@ const LearningMaterials = () => {
       <footer className="py-8 border-t border-border bg-background">
         <div className="container-narrow px-6 text-center">
           <p className="text-muted-foreground text-sm">
-            © {new Date().getFullYear()} Mulwa Martin. All rights reserved.
+            © {new Date().getFullYear()} Teacher Martin's Resources. All rights reserved.
           </p>
         </div>
       </footer>
