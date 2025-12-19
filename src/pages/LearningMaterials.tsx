@@ -4,19 +4,10 @@ import {
   ArrowLeft, 
   FlaskConical, 
   Atom, 
-  Download, 
-  Play, 
-  FileText, 
-  Video, 
   BookOpen,
   Beaker,
-  Zap,
-  Waves,
-  Thermometer,
-  Scale,
-  Lightbulb,
-  GraduationCap,
   ChevronRight,
+  ChevronDown,
   ExternalLink,
   Target,
   Eye,
@@ -25,113 +16,37 @@ import {
   Users,
   Clock,
   Sparkles,
-  Heart,
-  Mail
+  Mail,
+  MessageCircle,
+  GraduationCap
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { klbChemistrySyllabus, klbPhysicsSyllabus, FormSyllabus, Topic } from "@/data/klbSyllabus";
+import { SubjectAssistant } from "@/components/SubjectAssistant";
 
 const LearningMaterials = () => {
   const [activeSubject, setActiveSubject] = useState<"chemistry" | "physics">("chemistry");
+  const [expandedForms, setExpandedForms] = useState<Record<string, boolean>>({});
+  const [expandedTopics, setExpandedTopics] = useState<Record<string, boolean>>({});
+  const [isAssistantOpen, setIsAssistantOpen] = useState(false);
 
-  const chemistryTopics = [
-    {
-      title: "Introduction to Chemistry",
-      description: "Fundamentals of matter, atoms, and chemical reactions",
-      icon: Beaker,
-      resources: ["Notes PDF", "Video Lesson", "Practice Quiz"],
-      level: "Beginner"
-    },
-    {
-      title: "Atomic Structure",
-      description: "Electron configuration, orbitals, and periodic trends",
-      icon: Atom,
-      resources: ["Notes PDF", "Interactive Simulation", "Worksheet"],
-      level: "Intermediate"
-    },
-    {
-      title: "Chemical Bonding",
-      description: "Ionic, covalent, and metallic bonds explained",
-      icon: Zap,
-      resources: ["Notes PDF", "Video Lesson", "Lab Manual"],
-      level: "Intermediate"
-    },
-    {
-      title: "Organic Chemistry",
-      description: "Carbon compounds, functional groups, and reactions",
-      icon: FlaskConical,
-      resources: ["Notes PDF", "Molecular Models", "Practice Problems"],
-      level: "Advanced"
-    },
-    {
-      title: "Thermochemistry",
-      description: "Energy changes in chemical reactions",
-      icon: Thermometer,
-      resources: ["Notes PDF", "Calculations Guide", "Video Lesson"],
-      level: "Intermediate"
-    },
-    {
-      title: "Electrochemistry",
-      description: "Redox reactions, electrochemical cells, and applications",
-      icon: Zap,
-      resources: ["Notes PDF", "Lab Guide", "Quiz"],
-      level: "Advanced"
-    },
-  ];
+  const toggleForm = (form: string) => {
+    setExpandedForms(prev => ({ ...prev, [form]: !prev[form] }));
+  };
 
-  const physicsTopics = [
-    {
-      title: "Mechanics",
-      description: "Motion, forces, and Newton's laws",
-      icon: Scale,
-      resources: ["Notes PDF", "Video Lesson", "Problem Sets"],
-      level: "Beginner"
-    },
-    {
-      title: "Waves & Optics",
-      description: "Wave properties, light, and optical phenomena",
-      icon: Waves,
-      resources: ["Notes PDF", "Simulations", "Lab Manual"],
-      level: "Intermediate"
-    },
-    {
-      title: "Thermodynamics",
-      description: "Heat, temperature, and energy transfer",
-      icon: Thermometer,
-      resources: ["Notes PDF", "Calculations Guide", "Quiz"],
-      level: "Intermediate"
-    },
-    {
-      title: "Electricity & Magnetism",
-      description: "Electric circuits, fields, and electromagnetic phenomena",
-      icon: Zap,
-      resources: ["Notes PDF", "Circuit Simulator", "Lab Guide"],
-      level: "Intermediate"
-    },
-    {
-      title: "Modern Physics",
-      description: "Quantum mechanics, relativity, and nuclear physics",
-      icon: Atom,
-      resources: ["Notes PDF", "Video Series", "Conceptual Problems"],
-      level: "Advanced"
-    },
-    {
-      title: "Practical Physics",
-      description: "Laboratory techniques and experimental methods",
-      icon: Lightbulb,
-      resources: ["Lab Manual", "Video Demonstrations", "Data Analysis Guide"],
-      level: "All Levels"
-    },
-  ];
+  const toggleTopic = (topicKey: string) => {
+    setExpandedTopics(prev => ({ ...prev, [topicKey]: !prev[topicKey] }));
+  };
 
   const projects = [
     {
       title: "Virtual Chemistry Lab",
-      description: "A fully-equipped virtual lab where students can safely perform chemistry experiments online, with all instructions, materials, and guidance provided.",
+      description: "A fully-equipped virtual lab where students can safely perform chemistry experiments online, including titration, qualitative and quantitative analysis.",
       icon: FlaskConical,
-      status: "Coming Soon",
+      status: "Available",
       color: "bg-emerald-500/20 text-emerald-400",
-      link: null
+      link: "/virtual-lab"
     },
     {
       title: "AI-Powered Interactive Periodic Table",
@@ -180,6 +95,66 @@ const LearningMaterials = () => {
     { year: "Future", title: "Virtual Labs", description: "Developing immersive VR science laboratories and expanding resources." },
   ];
 
+  const renderSyllabus = (syllabus: FormSyllabus[]) => {
+    return syllabus.map((formData) => (
+      <div key={formData.form} className="mb-4">
+        <button
+          onClick={() => toggleForm(formData.form)}
+          className="w-full flex items-center justify-between p-4 bg-secondary/50 hover:bg-secondary rounded-xl transition-colors"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center">
+              <GraduationCap className="w-5 h-5 text-accent" />
+            </div>
+            <span className="font-display font-semibold text-foreground">{formData.form}</span>
+            <span className="text-sm text-muted-foreground">({formData.topics.length} topics)</span>
+          </div>
+          <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform ${expandedForms[formData.form] ? 'rotate-180' : ''}`} />
+        </button>
+        
+        {expandedForms[formData.form] && (
+          <div className="mt-2 space-y-2 pl-4">
+            {formData.topics.map((topic, topicIndex) => {
+              const topicKey = `${formData.form}-${topicIndex}`;
+              return (
+                <div key={topicKey} className="border border-border rounded-lg overflow-hidden">
+                  <button
+                    onClick={() => toggleTopic(topicKey)}
+                    className="w-full flex items-center justify-between p-3 bg-card hover:bg-secondary/30 transition-colors"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
+                        <BookOpen className="w-4 h-4 text-accent" />
+                      </div>
+                      <span className="font-medium text-foreground text-left">{topic.title}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-muted-foreground">{topic.subtopics.length} subtopics</span>
+                      <ChevronRight className={`w-4 h-4 text-muted-foreground transition-transform ${expandedTopics[topicKey] ? 'rotate-90' : ''}`} />
+                    </div>
+                  </button>
+                  
+                  {expandedTopics[topicKey] && (
+                    <div className="p-4 bg-secondary/20 border-t border-border">
+                      <ul className="space-y-2">
+                        {topic.subtopics.map((subtopic, subIndex) => (
+                          <li key={subIndex} className="flex items-start gap-2 text-sm text-muted-foreground">
+                            <span className="text-accent mt-1">•</span>
+                            <span>{subtopic}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    ));
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -211,8 +186,7 @@ const LearningMaterials = () => {
           </div>
           
           <p className="text-primary-foreground/80 max-w-2xl text-lg">
-            Access comprehensive learning resources, notes, video lessons, and interactive materials 
-            designed to help you master Chemistry and Physics concepts.
+            Access comprehensive KLB Kenya syllabus content for Chemistry and Physics with AI-powered tutoring assistance.
           </p>
         </div>
       </header>
@@ -221,7 +195,6 @@ const LearningMaterials = () => {
       <section className="section-padding bg-secondary/30">
         <div className="container-narrow px-6">
           <div className="grid md:grid-cols-2 gap-12 items-start">
-            {/* Our Mission */}
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <Target className="w-6 h-6 text-accent" />
@@ -235,17 +208,13 @@ const LearningMaterials = () => {
               </p>
             </div>
 
-            {/* About the Author */}
             <div className="card-elevated p-6 bg-gradient-to-br from-accent/5 to-transparent">
               <h2 className="font-display text-2xl font-bold text-foreground mb-4">About Teacher Martin</h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
                 Hello! I'm <span className="text-foreground font-semibold">Mulwa Martin</span>, the creator of this learning platform. I'm passionate about making science learning accessible and enjoyable for everyone — from curious beginners to lifelong learners.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                With a background in <span className="text-foreground font-medium">science education and technology</span>, I founded this platform to bridge the gap between traditional teaching and modern interactive learning. My goal is to build tools that help students <span className="text-foreground font-medium">understand concepts deeply</span> rather than just memorize formulas.
-              </p>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                When I'm not creating new learning resources or writing educational content, you'll probably find me exploring new teaching methods, reading about emerging technologies, or helping students discover the beauty of physics and chemistry.
+                With a background in <span className="text-foreground font-medium">science education and technology</span>, I founded this platform to bridge the gap between traditional teaching and modern interactive learning.
               </p>
               <a 
                 href="mailto:contact@example.com" 
@@ -268,7 +237,7 @@ const LearningMaterials = () => {
               <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground">Our Vision</h2>
             </div>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              We envision a world where every student has access to <span className="text-foreground font-medium">high-quality science education</span>, regardless of their location or background. Through interactive simulations, AI-powered assistance, and collaborative learning platforms, we're building the future of STEM education.
+              We envision a world where every student has access to <span className="text-foreground font-medium">high-quality science education</span>, regardless of their location or background.
             </p>
           </div>
 
@@ -278,7 +247,6 @@ const LearningMaterials = () => {
                 <Rocket className="w-5 h-5 text-accent" />
                 <h3 className="font-display text-lg font-semibold text-foreground">Innovation</h3>
               </div>
-              <p className="text-sm text-accent mb-2">Pushing Boundaries</p>
               <p className="text-muted-foreground text-sm">
                 Continuously developing new ways to make science education more engaging and effective.
               </p>
@@ -289,7 +257,6 @@ const LearningMaterials = () => {
                 <Globe className="w-5 h-5 text-accent" />
                 <h3 className="font-display text-lg font-semibold text-foreground">Accessibility</h3>
               </div>
-              <p className="text-sm text-accent mb-2">Education for All</p>
               <p className="text-muted-foreground text-sm">
                 Making quality science resources available to students everywhere, for free.
               </p>
@@ -356,23 +323,23 @@ const LearningMaterials = () => {
         </div>
       </section>
 
-      {/* Subject Tabs */}
+      {/* KLB Syllabus Section */}
       <section className="section-padding">
         <div className="container-narrow px-6">
           <div className="text-center mb-12">
             <span className="text-accent font-medium tracking-widest uppercase text-sm">
-              Learning Resources
+              KLB Kenya Syllabus
             </span>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-4 mb-4">
-              Explore by Subject
+              Complete Secondary School Curriculum
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Access comprehensive notes, video lessons, and interactive materials for Chemistry and Physics.
+              Access the complete KLB Kenya syllabus for Form 1-4 Chemistry and Physics. Click on each form to explore topics and subtopics.
             </p>
           </div>
 
           <Tabs defaultValue="chemistry" className="w-full">
-            <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-12">
+            <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
               <TabsTrigger 
                 value="chemistry" 
                 onClick={() => setActiveSubject("chemistry")}
@@ -392,21 +359,32 @@ const LearningMaterials = () => {
             </TabsList>
 
             <TabsContent value="chemistry" className="mt-0">
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {chemistryTopics.map((topic, index) => (
-                  <TopicCard key={topic.title} topic={topic} index={index} />
-                ))}
+              <div className="space-y-4">
+                {renderSyllabus(klbChemistrySyllabus)}
               </div>
             </TabsContent>
 
             <TabsContent value="physics" className="mt-0">
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {physicsTopics.map((topic, index) => (
-                  <TopicCard key={topic.title} topic={topic} index={index} />
-                ))}
+              <div className="space-y-4">
+                {renderSyllabus(klbPhysicsSyllabus)}
               </div>
             </TabsContent>
           </Tabs>
+
+          {/* AI Assistant Button */}
+          <div className="mt-8 text-center">
+            <Button
+              onClick={() => setIsAssistantOpen(true)}
+              size="lg"
+              className={`gap-2 ${activeSubject === "chemistry" ? "bg-emerald-500 hover:bg-emerald-600" : "bg-blue-500 hover:bg-blue-600"}`}
+            >
+              <MessageCircle className="w-5 h-5" />
+              Ask AI Tutor About {activeSubject === "chemistry" ? "Chemistry" : "Physics"}
+            </Button>
+            <p className="text-muted-foreground text-sm mt-2">
+              Get instant help with any topic from the KLB Kenya syllabus
+            </p>
+          </div>
         </div>
       </section>
 
@@ -426,7 +404,7 @@ const LearningMaterials = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {projects.map((project, index) => {
+            {projects.map((project) => {
               const CardContent = (
                 <div className="flex items-start gap-4">
                   <div className={`p-3 rounded-xl ${project.color.split(' ')[0]}`}>
@@ -479,23 +457,23 @@ const LearningMaterials = () => {
             Explore my projects and access complete, AI-enhanced resources to fully support your science learning journey.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link to="/periodic-table">
+            <Link to="/virtual-lab">
               <Button 
                 size="lg" 
                 className="bg-accent hover:bg-accent/90 text-primary gap-2"
               >
-                <Atom className="w-5 h-5" />
-                Try Interactive Periodic Table
+                <FlaskConical className="w-5 h-5" />
+                Try Virtual Chemistry Lab
               </Button>
             </Link>
-            <Link to="/#contact">
+            <Link to="/periodic-table">
               <Button 
                 variant="outline" 
                 size="lg"
                 className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 gap-2"
               >
-                <ExternalLink className="w-5 h-5" />
-                Contact for Tutoring
+                <Atom className="w-5 h-5" />
+                Interactive Periodic Table
               </Button>
             </Link>
           </div>
@@ -510,68 +488,13 @@ const LearningMaterials = () => {
           </p>
         </div>
       </footer>
-    </div>
-  );
-};
 
-interface TopicCardProps {
-  topic: {
-    title: string;
-    description: string;
-    icon: React.ComponentType<{ className?: string }>;
-    resources: string[];
-    level: string;
-  };
-  index: number;
-}
-
-const TopicCard = ({ topic, index }: TopicCardProps) => {
-  const getLevelColor = (level: string) => {
-    switch (level) {
-      case "Beginner":
-        return "bg-green-500/20 text-green-400";
-      case "Intermediate":
-        return "bg-amber-500/20 text-amber-400";
-      case "Advanced":
-        return "bg-red-500/20 text-red-400";
-      default:
-        return "bg-blue-500/20 text-blue-400";
-    }
-  };
-
-  return (
-    <div className="card-elevated p-6 group hover:scale-[1.02] transition-transform">
-      <div className="flex items-center justify-between mb-4">
-        <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
-          <topic.icon className="w-6 h-6 text-accent" />
-        </div>
-        <span className={`text-xs px-2 py-1 rounded-full ${getLevelColor(topic.level)}`}>
-          {topic.level}
-        </span>
-      </div>
-      
-      <h3 className="font-display text-lg font-semibold text-foreground mb-2">
-        {topic.title}
-      </h3>
-      <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-        {topic.description}
-      </p>
-      
-      <div className="flex flex-wrap gap-2">
-        {topic.resources.map((resource) => (
-          <span
-            key={resource}
-            className="text-xs px-2 py-1 bg-secondary rounded-full text-muted-foreground"
-          >
-            {resource}
-          </span>
-        ))}
-      </div>
-      
-      <button className="mt-4 w-full flex items-center justify-center gap-2 py-2 text-sm text-accent hover:text-foreground transition-colors group/btn">
-        Access Materials
-        <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-      </button>
+      {/* AI Assistant Modal */}
+      <SubjectAssistant 
+        subject={activeSubject} 
+        isOpen={isAssistantOpen} 
+        onClose={() => setIsAssistantOpen(false)} 
+      />
     </div>
   );
 };
