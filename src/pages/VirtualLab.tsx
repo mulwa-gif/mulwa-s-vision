@@ -16,13 +16,15 @@ import {
   Flame,
   Cloud,
   Zap,
-  BookOpen
+  BookOpen,
+  Ruler
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import ElectrochemistryLab from "@/components/ElectrochemistryLab";
 import ChemistryQuiz from "@/components/ChemistryQuiz";
+import PhysicsLab from "@/components/labs/PhysicsLab";
 
 interface TitrationState {
   buretteVolume: number;
@@ -467,7 +469,7 @@ const VirtualLab = () => {
       <section className="section-padding">
         <div className="container-narrow px-6">
           <Tabs defaultValue="titration" className="w-full">
-            <TabsList className="grid w-full max-w-4xl mx-auto grid-cols-4 md:grid-cols-7 mb-8">
+            <TabsList className="grid w-full max-w-5xl mx-auto grid-cols-4 md:grid-cols-8 mb-8">
               <TabsTrigger value="titration" className="gap-1 text-xs">
                 <Pipette className="w-4 h-4" />
                 <span className="hidden md:inline">Titration</span>
@@ -488,15 +490,20 @@ const VirtualLab = () => {
                 <Zap className="w-4 h-4" />
                 <span className="hidden md:inline">Electrolysis</span>
               </TabsTrigger>
-              <TabsTrigger value="quantitative" className="gap-1 text-xs">
-                <Scale className="w-4 h-4" />
-                <span className="hidden md:inline">Quantitative</span>
+              <TabsTrigger value="physics" className="gap-1 text-xs">
+                <Ruler className="w-4 h-4" />
+                <span className="hidden md:inline">Physics</span>
               </TabsTrigger>
               <TabsTrigger value="quiz" className="gap-1 text-xs">
                 <BookOpen className="w-4 h-4" />
                 <span className="hidden md:inline">Quiz</span>
               </TabsTrigger>
             </TabsList>
+
+            {/* Physics Lab Tab */}
+            <TabsContent value="physics">
+              <PhysicsLab />
+            </TabsContent>
 
             {/* Titration Experiment */}
             <TabsContent value="titration">
