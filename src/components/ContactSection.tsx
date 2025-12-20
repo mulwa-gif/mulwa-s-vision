@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Send, AtSign } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
@@ -8,9 +8,15 @@ const ContactSection = () => {
   const contactInfo = [
     {
       icon: Mail,
-      label: "Email",
+      label: "Personal Email",
       value: "martinmulwa0150@gmail.com",
       href: "mailto:martinmulwa0150@gmail.com",
+    },
+    {
+      icon: AtSign,
+      label: "Institutional Email",
+      value: "mulwamartin@students.seku.ac.ke",
+      href: "mailto:mulwamartin@students.seku.ac.ke",
     },
     {
       icon: Phone,
@@ -49,31 +55,31 @@ const ContactSection = () => {
             Let's Connect
           </h2>
           <p className="text-primary-foreground/80 max-w-2xl mx-auto">
-            I'm open to academic collaborations, innovation opportunities, leadership engagements, and civic discussions. Feel free to reach out.
+            I'm open to academic collaborations, teaching opportunities, innovation projects, leadership engagements, and educational technology discussions. Feel free to reach out.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
           {contactInfo.map((item) => (
             <div
               key={item.label}
-              className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6 text-center border border-primary-foreground/10 hover:bg-primary-foreground/15 transition-colors group"
+              className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-5 text-center border border-primary-foreground/10 hover:bg-primary-foreground/15 transition-colors group"
             >
-              <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-accent/30 transition-colors">
-                <item.icon className="w-6 h-6 text-accent" />
+              <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-3 group-hover:bg-accent/30 transition-colors">
+                <item.icon className="w-5 h-5 text-accent" />
               </div>
-              <h3 className="font-display font-semibold text-primary-foreground mb-2">
+              <h3 className="font-display font-semibold text-primary-foreground mb-1 text-sm">
                 {item.label}
               </h3>
               {item.href ? (
                 <a
                   href={item.href}
-                  className="text-primary-foreground/80 hover:text-accent transition-colors text-sm break-all"
+                  className="text-primary-foreground/80 hover:text-accent transition-colors text-xs break-all"
                 >
                   {item.value}
                 </a>
               ) : (
-                <p className="text-primary-foreground/80 text-sm">
+                <p className="text-primary-foreground/80 text-xs">
                   {item.value}
                 </p>
               )}

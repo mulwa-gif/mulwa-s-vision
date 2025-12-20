@@ -14,11 +14,15 @@ import {
   Pipette,
   Scale,
   Flame,
-  Cloud
+  Cloud,
+  Zap,
+  BookOpen
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
+import ElectrochemistryLab from "@/components/ElectrochemistryLab";
+import ChemistryQuiz from "@/components/ChemistryQuiz";
 
 interface TitrationState {
   buretteVolume: number;
@@ -463,26 +467,34 @@ const VirtualLab = () => {
       <section className="section-padding">
         <div className="container-narrow px-6">
           <Tabs defaultValue="titration" className="w-full">
-            <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-5 mb-8">
-              <TabsTrigger value="titration" className="gap-1 text-xs sm:text-sm">
+            <TabsList className="grid w-full max-w-4xl mx-auto grid-cols-4 md:grid-cols-7 mb-8">
+              <TabsTrigger value="titration" className="gap-1 text-xs">
                 <Pipette className="w-4 h-4" />
-                <span className="hidden sm:inline">Titration</span>
+                <span className="hidden md:inline">Titration</span>
               </TabsTrigger>
-              <TabsTrigger value="qualitative" className="gap-1 text-xs sm:text-sm">
+              <TabsTrigger value="qualitative" className="gap-1 text-xs">
                 <TestTube className="w-4 h-4" />
-                <span className="hidden sm:inline">Qualitative</span>
+                <span className="hidden md:inline">Qualitative</span>
               </TabsTrigger>
-              <TabsTrigger value="precipitation" className="gap-1 text-xs sm:text-sm">
+              <TabsTrigger value="precipitation" className="gap-1 text-xs">
                 <Droplets className="w-4 h-4" />
-                <span className="hidden sm:inline">Precipitation</span>
+                <span className="hidden md:inline">Precipitation</span>
               </TabsTrigger>
-              <TabsTrigger value="gastests" className="gap-1 text-xs sm:text-sm">
+              <TabsTrigger value="gastests" className="gap-1 text-xs">
                 <Cloud className="w-4 h-4" />
-                <span className="hidden sm:inline">Gas Tests</span>
+                <span className="hidden md:inline">Gas Tests</span>
               </TabsTrigger>
-              <TabsTrigger value="quantitative" className="gap-1 text-xs sm:text-sm">
+              <TabsTrigger value="electrolysis" className="gap-1 text-xs">
+                <Zap className="w-4 h-4" />
+                <span className="hidden md:inline">Electrolysis</span>
+              </TabsTrigger>
+              <TabsTrigger value="quantitative" className="gap-1 text-xs">
                 <Scale className="w-4 h-4" />
-                <span className="hidden sm:inline">Quantitative</span>
+                <span className="hidden md:inline">Quantitative</span>
+              </TabsTrigger>
+              <TabsTrigger value="quiz" className="gap-1 text-xs">
+                <BookOpen className="w-4 h-4" />
+                <span className="hidden md:inline">Quiz</span>
               </TabsTrigger>
             </TabsList>
 
@@ -1092,6 +1104,16 @@ const VirtualLab = () => {
                   </div>
                 )}
               </div>
+            </TabsContent>
+
+            {/* Electrochemistry */}
+            <TabsContent value="electrolysis">
+              <ElectrochemistryLab />
+            </TabsContent>
+
+            {/* Quiz */}
+            <TabsContent value="quiz">
+              <ChemistryQuiz />
             </TabsContent>
           </Tabs>
         </div>

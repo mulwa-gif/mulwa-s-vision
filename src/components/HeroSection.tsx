@@ -36,11 +36,15 @@ const HeroSection = () => {
         </div>
 
         <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-primary-foreground mb-6 animate-fade-up opacity-0 animation-delay-200">
-          Mulwa Martin
+          Martin Mulwa
         </h1>
 
-        <p className="text-xl md:text-2xl text-primary-foreground/80 max-w-2xl mx-auto mb-8 animate-fade-up opacity-0 animation-delay-300 font-light">
-          Science, Innovation, and Civic Courage
+        <p className="text-xl md:text-2xl text-primary-foreground/80 max-w-2xl mx-auto mb-4 animate-fade-up opacity-0 animation-delay-300 font-light">
+          Science Educator · Educational Innovator · STEM Advocate
+        </p>
+        
+        <p className="text-base md:text-lg text-primary-foreground/60 max-w-xl mx-auto mb-8 animate-fade-up opacity-0 animation-delay-300">
+          B.Ed Science (Chemistry & Physics) | South Eastern Kenya University
         </p>
 
         {/* Contact Pills */}

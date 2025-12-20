@@ -12,15 +12,15 @@ const EducationSection = () => {
       program: "Bachelor of Education (Science)",
       details: "Chemistry & Physics",
       description:
-        "Focus on pedagogy, learner-centered instruction, and curriculum interpretation",
+        "Focus on pedagogy, learner-centered instruction, curriculum interpretation, and educational technology integration",
       current: true,
     },
     {
       icon: School,
       level: "Secondary Education",
       institution: "Kaasya Secondary School",
-      program: "Kenya Certificate of Secondary Education",
-      details: null,
+      program: "Kenya Certificate of Secondary Education (KCSE)",
+      details: "Mean Grade: B (Plain)",
       description: null,
       current: false,
     },
@@ -28,8 +28,8 @@ const EducationSection = () => {
       icon: BookOpen,
       level: "Primary Education",
       institution: "Kwanyaaa Primary School",
-      program: "Kenya Certificate of Primary Education",
-      details: null,
+      program: "Kenya Certificate of Primary Education (KCPE)",
+      details: "Score: 386 Marks",
       description: null,
       current: false,
     },
@@ -49,7 +49,7 @@ const EducationSection = () => {
             Education
           </span>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mt-4">
-            Academic Journey
+            Academic Background
           </h2>
         </div>
 
@@ -86,7 +86,7 @@ const EducationSection = () => {
                           </span>
                           {item.current && (
                             <span className="px-2 py-0.5 bg-accent/20 text-accent text-xs rounded-full font-medium">
-                              Current
+                              Ongoing
                             </span>
                           )}
                         </div>
@@ -97,7 +97,7 @@ const EducationSection = () => {
                           {item.program}
                         </p>
                         {item.details && (
-                          <p className="text-muted-foreground text-sm mt-1">
+                          <p className="text-accent text-sm mt-1 font-medium">
                             {item.details}
                           </p>
                         )}
